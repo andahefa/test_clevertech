@@ -21,6 +21,7 @@ public class LoginPage extends Transversal {
     }
 
     public boolean successfulLogin(){
+        waitExplicit(lblSuccessfulLogin);
         return isDisplayed(lblSuccessfulLogin);
     }
 

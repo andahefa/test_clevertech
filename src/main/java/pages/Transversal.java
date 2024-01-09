@@ -4,7 +4,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import utilities.Constants;
 
+import java.time.Duration;
 import java.util.List;
 
 public class Transversal {
@@ -17,7 +22,9 @@ public class Transversal {
 
     public WebDriver chromeDriverConnection() {
         System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "/src/main/resources/drivers/chromedriver");
-        driver = new ChromeDriver();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--start-maximized");
+        driver = new ChromeDriver(options);
         return driver;
     }
 
@@ -55,5 +62,12 @@ public class Transversal {
 
     public void openUrl(String url) {
         driver.get(url);
+    }
+
+    public void waitExplicit(By locator){
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(Constants.WAITEXPLICIT));
+        wait.until(
+                ExpectedConditions.visibilityOfElementLocated(locator));
+
     }
 }
